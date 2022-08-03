@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.looizao.infrastructure.MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-08-03T23:38:03" hostname="mbp.local" time="0.027">
+  <properties/>
+  <testcase name="testMain()" classname="com.looizao.infrastructure.MainTest" time="0.027"/>
+  <system-out><![CDATA[Hello world!
+com.looizao.domain.Category@20c0a64d
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

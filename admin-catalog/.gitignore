@@ -9,7 +9,7 @@ ivy-cache
 argfile*
 activemq-data/
 classes/
-/domain/build
+domain/build
 
 # Log files
 jxl.log

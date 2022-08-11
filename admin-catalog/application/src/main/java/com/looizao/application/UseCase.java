@@ -1,10 +1,6 @@
 package com.looizao.application;
 
+public abstract class UseCase<IN, OUT> {
 
-import com.looizao.domain.category.Category;
-
-public class UseCase {
-    public Category execute() {
-        return new Category();
-    }
+    public abstract OUT execute(IN anIn);
 }

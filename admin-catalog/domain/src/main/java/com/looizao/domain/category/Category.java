@@ -4,7 +4,6 @@ import com.looizao.domain.AggregateRoot;
 import com.looizao.domain.validation.ValidationHandler;
 
 import java.time.Instant;
-import java.util.UUID;
 
 public class Category extends AggregateRoot<CategoryID> {
     private String name;
@@ -39,13 +38,43 @@ public class Category extends AggregateRoot<CategoryID> {
     ) {
         final var id = CategoryID.unique();
         final var now = Instant.now();
+        final var deletedAt = isActive ? null : now;
 
-        return new Category(id, aName, aDescription, isActive, now, now, null);
+        return new Category(id, aName, aDescription, isActive, now, now, deletedAt);
     }
 
     @Override
     public void validate(final ValidationHandler aValidationHandler) {
         new CategoryValidator(this, aValidationHandler).validate();
+    }
+
+    public Category activate() {
+        this.deletedAt = null;
+        this.active = true;
+        this.updatedAt = Instant.now();
+        return this;
+    }
+    public Category deactivate() {
+        if (getDeletedAt() == null) {
+            this.deletedAt = Instant.now();
+        }
+
+        this.active = false;
+        this.updatedAt = Instant.now();
+        return this;
+    }
+
+    public Category update(final String aName, final String aDescription, final boolean isActive) {
+        if (isActive) {
+            activate();
+        } else {
+            deactivate();
+        }
+
+        this.name = aName;
+        this.description = aDescription;
+        this.updatedAt = Instant.now();
+        return this;
     }
 
     public CategoryID getId() {
